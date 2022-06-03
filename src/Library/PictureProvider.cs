@@ -36,7 +36,7 @@ namespace CompAndDel
         /// </summary>
         /// <param name="picture">La imagen a guardar.</param>
         /// <param name="path">El path del archivo donde guardar la imagen.</param>
-        public void SavePicture(IPicture picture, string path)
+        public static void SavePicture(IPicture picture, string path)
         {
             int width = picture.Width;
             int height = picture.Height;
