@@ -13,6 +13,8 @@ namespace CompAndDel.Pipes
         protected IFilter falseFiltro;
         protected IPipe nextPipe;
         public bool whichFilter = false;
+
+       private ConditionalFilter conditionalFilter1;
     
         
         /// <summary>
@@ -24,6 +26,7 @@ namespace CompAndDel.Pipes
         public ConditionalPipe(ConditionalFilter conditionalFilter,IFilter trueFiltro, IFilter falseFiltro, IPipe nextPipe)
         {
             this.whichFilter = conditionalFilter.HasFace;
+       
             this.nextPipe = nextPipe;
             this.trueFiltro = trueFiltro;
             this.falseFiltro = falseFiltro;
@@ -44,7 +47,7 @@ namespace CompAndDel.Pipes
         {
             get
             {
-                if (whichFilter == true)
+                if (this.whichFilter == true)
                 {
                     return this.trueFiltro;
                 }
@@ -57,7 +60,7 @@ namespace CompAndDel.Pipes
         /// <param name="picture">Imagen a la cual se debe aplicar el filtro</param>
         public IPicture Send(IPicture picture)
         {
-            if (whichFilter == true)
+            if (this.whichFilter == true)
             {
                 picture = this.trueFiltro.Filter(picture);
             }

@@ -60,9 +60,26 @@ namespace CompAndDel
 
             // ---------------- PARTE 4 -------------------
         
-            ConditionalFilter conditionalFilter = new ConditionalFilter();
+            PictureProvider provider = new PictureProvider();
+            IPicture picture = provider.GetPicture(@"beer.jpg");
+
+            ConditionalFilter conditionalFilter = new ConditionalFilter(@"beer.jpg");
+            FilterNegative filterNegative = new FilterNegative();
+            FilterGreyscale filterGreyscale = new FilterGreyscale();
+            PipeNull pipeNull = new PipeNull();
             
+
+
+            ConditionalPipe conditionalPipe = new ConditionalPipe(conditionalFilter, filterGreyscale, filterNegative,  pipeNull);
+
             
+
+            IPicture p = conditionalPipe.Send(picture);      
+            
+            PictureProvider.SavePicture(p, @"FinalImageConditional.jpg");
+
+            
+         
 
         }
     }
